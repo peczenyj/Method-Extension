@@ -5,7 +5,7 @@ sub new {
     bless {}, $_[0];    
 }
 
-sub baz :Extension(Foo::baz) {
+sub baz :ExtensionMethod(Foo::baz) {
     "Baz from extension method";
 }
 
