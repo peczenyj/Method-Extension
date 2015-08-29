@@ -24,7 +24,7 @@ Method::Extension - easily extend existing packages using method extension
 
 One good definition of Method Extension can be found [here](https://msdn.microsoft.com/en-us/library/vstudio/bb383977\(v=vs.110\).aspx).
 
->        Extension methods enable you to "add" methods to existing types without creating a new derived type, 
+> Extension methods enable you to "add" methods to existing types without creating a new derived type, 
 > recompiling, or otherwise modifying the original type. Extension methods are a special kind of static method, 
 > but they are called as if they were instance methods on the extended type. For client code written in C# and 
 > Visual Basic, there is no apparent difference between calling an extension method and the methods that are 
