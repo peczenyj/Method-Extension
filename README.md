@@ -45,7 +45,7 @@ Of course, in Perl we have more tools. [Moose](https://metacpan.org/pod/Moose)/[
 
 But I miss extension methods. Because it is a syntax sugar we do not change the original class, and there is no way to emulate this in Perl (maybe override the operator -> or using some dark magic). 
 
-The solution is ugly: this package offer one [attribute](https://metacpan.org/pod/attribute) `ExtensionMethod` and it allows to inject the subroutine in the specified package. It is not a **real** extension method but it is our first effort. It is important call the attribute with the package + the method name ( I loose the subroutine name when we real with attributes ). 
+The solution is ugly: this package offer one [attribute](https://metacpan.org/pod/attributes) `ExtensionMethod` and it allows to inject the subroutine in the specified package. It is not a **real** extension method but it is our first effort. It is important call the attribute with the package + the method name ( I loose the subroutine name when we real with attributes ). 
 
 What we have: one attribute who helps to inject one subroutine in another package.
 
