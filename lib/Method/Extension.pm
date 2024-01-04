@@ -6,7 +6,7 @@ use warnings;
 
 # ABSTRACT: Method Extension port for perl
 
-our $VERSION = "0.1";
+our $VERSION = "0.2";
 
 use base 'Attribute::Handlers';
 
