@@ -3,12 +3,11 @@ package Method::Extension;
 use 5.006;
 use strict;
 use warnings;
+use Attribute::Handlers;
 
 # ABSTRACT: Method Extension port for perl
 
 our $VERSION = "0.2";
-
-use base 'Attribute::Handlers';
 
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
     my ( $symbol, $referent, $packages ) = @_[ 1, 2, 4 ];
