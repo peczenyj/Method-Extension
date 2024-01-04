@@ -6,7 +6,7 @@ use warnings;
 
 # ABSTRACT: Method Extension port for perl
 
-use parent 'Attribute::Handlers';
+use base 'Attribute::Handlers';
 
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
     my ( $package, $symbol, $referent, $attr, $data, $phase ) = @_;
