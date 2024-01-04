@@ -1,51 +1,46 @@
 use strict;
 use warnings;
 
-use 5.006;
-
 use ExtUtils::MakeMaker;
 
-my %WriteMakefileArgs = (
-  "ABSTRACT" => "Method Extension port for perl",
-  "AUTHOR" => "Tiago Peczenyj <tiago.peczenyj\@gmail.com>",
-  "BUILD_REQUIRES" => {
-    "Module::Build" => "0.28"
-  },
-  "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => 0,
-    "Module::Build" => "0.28"
-  },
-  "DISTNAME" => "Method-Extension",
-  "LICENSE" => "mit",
-  "MIN_PERL_VERSION" => "5.006",
-  "NAME" => "Method::Extension",
-  "PREREQ_PM" => {
-    "Attribute::Handlers" => 0
-  },
-  "TEST_REQUIRES" => {
-    "Test::More" => 0
-  },
-  "VERSION" => "0.1",
-  "test" => {
-    "TESTS" => "t/*.t"
-  }
+WriteMakefile(
+    NAME               => 'Method::Extension',
+    DISTNAME           => "Method-Extension",
+    AUTHOR             => 'Tiago Peczenyj <tiago.peczenyj+cpan@gmail.com>',
+    LICENSE            => "mit",
+    ABSTRACT_FROM      => 'lib/Method/Extension.pm',
+    VERSION_FROM       => 'lib/Method/Extension.pm',
+    MIN_PERL_VERSION   => 5.008,
+    CONFIGURE_REQUIRES => { 'ExtUtils::MakeMaker' => 0 },
+    PREREQ_PM          => {
+        "Attribute::Handlers" => 0
+    },
+    TEST_REQUIRES => {
+        'Test::More'      => 0.94,
+        'Test::Pod'       => 0,
+    },
+    (   eval { ExtUtils::MakeMaker->VERSION(6.46) }
+        ? ( META_MERGE => {
+                'meta-spec'    => { version => 2 },
+                dynamic_config => 0,
+                resources      => {
+                    homepage =>
+                      'https://github.com/peczenyj/Method-Extension',
+                    repository => {
+                        type => 'git',
+                        url  =>
+                          'https://github.com/peczenyj/Method-Extension.git',
+                        web =>
+                          'https://github.com/peczenyj/Method-Extension',
+                    },
+                    bugtracker => {
+                        web =>
+                          'https://github.com/peczenyj/Method-Extension/issues'
+                    },
+                },
+                x_authority => 'cpan:PACMAN',
+            }
+          )
+        : ()
+    ),
 );
-
-
-my %FallbackPrereqs = (
-  "Attribute::Handlers" => 0,
-  "Module::Build" => "0.28",
-  "Test::More" => 0
-);
-
-
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
-  delete $WriteMakefileArgs{TEST_REQUIRES};
-  delete $WriteMakefileArgs{BUILD_REQUIRES};
-  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
-}
-
-delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
-
-WriteMakefile(%WriteMakefileArgs);

@@ -6,6 +6,8 @@ use warnings;
 
 # ABSTRACT: Method Extension port for perl
 
+our $VERSION = "0.1";
+
 use base 'Attribute::Handlers';
 
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
