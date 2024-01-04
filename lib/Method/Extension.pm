@@ -11,11 +11,17 @@ our $VERSION = "0.1";
 use base 'Attribute::Handlers';
 
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
-    my ( $package, $symbol, $referent, $attr, $data, $phase ) = @_;
+    my ( $referent, $data ) = @_[ 2, 4 ];
+
     $data = [$data] unless ref $data eq 'ARRAY';
+
     foreach my $item ( @{$data} ) {
-        no strict 'refs';
-        *{$item} = $referent;
+        {
+            no strict 'refs';
+            use warnings FATAL => 'uninitialized';
+
+            *{$item} = $referent;
+        }
     }
 }
 
@@ -87,8 +93,6 @@ Better:
 	Foo->new->baz # method not found
 
 If someone has some idea to help me on this, please let me know.
-
-Ps: AUTOLOAD seems B<very> ugly and intrusive too.
 
 =head1 ATTRIBUTES
 
