@@ -11,16 +11,18 @@ our $VERSION = "0.1";
 use base 'Attribute::Handlers';
 
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
-    my ( $referent, $data ) = @_[ 2, 4 ];
+    my ( $symbol, $referent, $packages ) = @_[ 1, 2, 4 ];
 
-    $data = [$data] unless ref $data eq 'ARRAY';
+    my $original_method_name = *{$symbol}{NAME};
 
-    foreach my $item ( @{$data} ) {
+    $packages = [$packages] unless ref $packages eq 'ARRAY';
+
+    foreach my $package ( @{$packages} ) {
         {
             no strict 'refs';
             use warnings FATAL => 'uninitialized';
 
-            *{$item} = $referent;
+            *{"$package\::$original_method_name"} = $referent;
         }
     }
 }
@@ -41,7 +43,7 @@ Method::Extension - easily extend existing packages using method extension
 
     use Method::Extension;
 
-    sub baz :ExtensionMethod(Foo::baz) {
+    sub baz :ExtensionMethod(Foo) {
         my ($self, ... ) = @_; # $self will be a Foo instance
 
         return "Baz from extension method";
@@ -71,21 +73,17 @@ You can do:
 
 With this attribute we can insert one subroutine to one existing package.
 
-Usage: C<ExtensionMethod(Package::method_name)>.
+Usage: C<ExtensionMethod(Package::original_method_name)>.
 
 Example:
 
     package Bar;
 
-    sub baz :ExtensionMethod(Foo::baz) {
+    sub baz :ExtensionMethod(Foo) {
         ...
     }
 
 This inject the method Bar::baz into Foo::baz.
-
-Important: you should not forget to rewrite the method name. We loose the subroutine name when we deal with attribute.
-
-The good point is: we can use a different name. And we can inject in multiple packages too if we pass an array.
 
 =head1 LICENSE
 
