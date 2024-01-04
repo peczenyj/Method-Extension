@@ -10,7 +10,7 @@ How to contribute to C<Method-Extension>?
 Patches are welcome!
 
 They must be built against the
-C<L<main|https://github.com/peczenyj/Method-Extension/tree/master>> branch,
+C<L<devel|https://github.com/peczenyj/Method-Extension/tree/devel>> branch,
 then submitted as pull requests at GitHub.
 
 The documentation is written using the
