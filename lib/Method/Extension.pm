@@ -33,36 +33,37 @@ Method::Extension - easily extend existing packages using method extension
 
 =head1 SYNOPSIS
 
-	package Foo;
-	# no baz method
-	...
+    package Foo;
+    # no baz method
+    ...
 
-	package Bar;
+    package Bar;
 
-	use Method::Extension;
+    use Method::Extension;
 
-	sub baz :ExtensionMethod(Foo::baz) {
-		my ($self, ... ) = @_; # $self will be a Foo instance
-    	return "Baz from extension method";
-	}
-	...
+    sub baz :ExtensionMethod(Foo::baz) {
+        my ($self, ... ) = @_; # $self will be a Foo instance
 
-	Foo->new->baz();	
+        return "Baz from extension method";
+    }
+    ...
+
+    Foo->new->baz();
 
 =head1 DESCRIPTION
 
 One good definition of Method Extension can be found L<here|https://msdn.microsoft.com/en-us/library/vstudio/bb383977(v=vs.110).aspx>.
 
-	Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. Extension methods are a special kind of static method, but they are called as if they were instance methods on the extended type. For client code written in C# and Visual Basic, there is no apparent difference between calling an extension method and the methods that are actually defined in a type.
+    Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. Extension methods are a special kind of static method, but they are called as if they were instance methods on the extended type. For client code written in C# and Visual Basic, there is no apparent difference between calling an extension method and the methods that are actually defined in a type.
 
 In other words, you can create, in C# for example, one subroutine and use a syntax sugar to invoke as a method. In other words, instead do this:
 
-	my $foo = Foo->new;
-	baz( $foo );
+    my $foo = Foo->new;
+    baz( $foo );
 
 You can do:
 
-	$foo->baz(); # magic!
+    $foo->baz(); # magic!
 
 This is very useful when you deal with languages like C# or Java, when you have a very strict way for add behavior to one class (Java does not support multiple inheritance, for example). 
 
@@ -76,21 +77,21 @@ What we have: one attribute who helps to inject one subroutine in another packag
 
 What I want to do (future): one way to avoid inject the subroutine, just like the sugar:
 
-	$object->extension_method( args... );
+    $object->extension_method( args... );
 
 became
 
-	extension_method( $object, args... );
+    extension_method( $object, args... );
 
 Better:
 
-	{
-		use Bar qw(baz);
+    {
+        use Bar qw(baz);
 
-		Foo->new->baz; # ok
-	}
+        Foo->new->baz; # ok
+    }
 
-	Foo->new->baz # method not found
+    Foo->new->baz # method not found
 
 If someone has some idea to help me on this, please let me know.
 
@@ -104,11 +105,11 @@ Usage: C<ExtensionMethod(Package::method_name)>.
 
 Example:
 
-	package Bar;
+    package Bar;
 
-	sub baz :ExtensionMethod(Foo::baz) {
-		...
-	} 
+    sub baz :ExtensionMethod(Foo::baz) {
+        ...
+    }
 
 This inject the method Bar::baz into Foo::baz.
 
