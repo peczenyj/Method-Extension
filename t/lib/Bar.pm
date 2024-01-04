@@ -1,11 +1,11 @@
 package Bar;
 use Method::Extension;
 
-sub new { 
-    bless {}, $_[0];    
+sub new {
+    bless {}, $_[0];
 }
 
-sub baz :ExtensionMethod(Foo::baz) {
+sub baz : ExtensionMethod(Foo::baz) {
     "Baz from extension method";
 }
 

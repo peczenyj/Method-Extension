@@ -1,9 +1,14 @@
 #!perl
 use Test::More;
-use t::lib::Foo;
-use t::lib::Bar;
+
+use lib 't/lib';
+
+use Foo;
+use Bar;
 
 my $foo = Foo->new;
+
+isa_ok $foo, 'Foo';
 
 can_ok $foo, 'baz';
 

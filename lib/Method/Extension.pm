@@ -1,16 +1,17 @@
+package Method::Extension;
+
 use 5.006;
 use strict;
 use warnings;
-package Method::Extension;
 
 # ABSTRACT: Method Extension port for perl
 
 use parent 'Attribute::Handlers';
- 
+
 sub UNIVERSAL::ExtensionMethod : ATTR(CODE) {
-    my ($package, $symbol, $referent, $attr, $data, $phase) = @_;
+    my ( $package, $symbol, $referent, $attr, $data, $phase ) = @_;
     $data = [$data] unless ref $data eq 'ARRAY';
-    foreach my $item (@{$data}) {
+    foreach my $item ( @{$data} ) {
         no strict 'refs';
         *{$item} = $referent;
     }
