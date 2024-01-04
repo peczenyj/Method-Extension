@@ -65,36 +65,6 @@ You can do:
 
     $foo->baz(); # magic!
 
-This is very useful when you deal with languages like C# or Java, when you have a very strict way for add behavior to one class (Java does not support multiple inheritance, for example). 
-
-Of course, in Perl we have more tools. L<Moose>/L<Moo> Roles, for example, are a great way to extend one class ( and you can apply one role in runtime ).
-
-But I miss extension methods. Because it is a syntax sugar we do not change the original class, and there is no way to emulate this in Perl (maybe override the operator -> or using some dark magic). 
-
-The solution is ugly: this package offer one L<attribute> C<ExtensionMethod> and it allows to inject the subroutine in the specified package. It is not a B<real> extension method but it is our first effort. It is important call the attribute with the package + the method name ( I loose the subroutine name when we real with attributes ). 
-
-What we have: one attribute who helps to inject one subroutine in another package.
-
-What I want to do (future): one way to avoid inject the subroutine, just like the sugar:
-
-    $object->extension_method( args... );
-
-became
-
-    extension_method( $object, args... );
-
-Better:
-
-    {
-        use Bar qw(baz);
-
-        Foo->new->baz; # ok
-    }
-
-    Foo->new->baz # method not found
-
-If someone has some idea to help me on this, please let me know.
-
 =head1 ATTRIBUTES
 
 =head2 ExtensionMethod
