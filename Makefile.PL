@@ -10,7 +10,7 @@ WriteMakefile(
     LICENSE            => "mit",
     ABSTRACT_FROM      => 'lib/Method/Extension.pm',
     VERSION_FROM       => 'lib/Method/Extension.pm',
-    MIN_PERL_VERSION   => 5.008,
+    MIN_PERL_VERSION   => 5.006,
     CONFIGURE_REQUIRES => { 'ExtUtils::MakeMaker' => 0 },
     PREREQ_PM          => {
         "Attribute::Handlers" => 0
