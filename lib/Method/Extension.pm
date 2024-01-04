@@ -73,7 +73,7 @@ You can do:
 
 With this attribute we can insert one subroutine to one existing package.
 
-Usage: C<ExtensionMethod(Package::original_method_name)>.
+Usage: C<ExtensionMethod(Package)>.
 
 Example:
 
@@ -84,6 +84,8 @@ Example:
     }
 
 This inject the method Bar::baz into Foo::baz.
+
+This attribute support multiple packages.
 
 =head1 LICENSE
 
